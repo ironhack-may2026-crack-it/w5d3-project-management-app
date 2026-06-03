@@ -37,7 +37,7 @@ function EditProjectPage() {
 
     try {
       // call the API here to edit one project...
-      const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`, body)
+      await axios.put(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`, body)
       
       navigate(`/projects/${projectId}`)
 
@@ -50,7 +50,7 @@ function EditProjectPage() {
   const deleteProject = async() => {
     try {
       // call the API here to delete one task...
-      const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`)
+      await axios.delete(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`)
       navigate("/projects")
       
     } catch (error) {

@@ -21,7 +21,7 @@ function CreateProjectPage() {
     try {
       setIsCreating(true) // disable the button while the call to the backend is made.
       // call the API here to create one project...
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/projects`, body)
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}/projects`, body)
       
       navigate("/projects")
 
