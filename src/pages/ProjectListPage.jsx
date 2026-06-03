@@ -11,12 +11,15 @@ function ProjectListPage() {
 
   useEffect(() => {
     getData()
-  })
+  }, [])
 
   const getData = async() => {
     try {
 
       // call the API here to receive all projects...
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/projects`)
+      console.log(response)
+      setAllProjects(response.data)
 
       setIsLoading(false) // render the component once the data finished loading
 
@@ -37,6 +40,12 @@ function ProjectListPage() {
 
       {/* ... list of all projects should be rendered here   */}
       {/* ... for each project, we should render one ProjectCard */}
+      {allProjects.map((project) => {
+        return <ProjectCard key={project.id} project={project}/>
+
+        //* ...or passing the properties of the object by spreading them
+        // return <ProjectCard key={project.id} {...project}/>
+      })}
        
     </div>
   );

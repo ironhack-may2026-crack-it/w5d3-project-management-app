@@ -1,15 +1,28 @@
 import { Link } from "react-router-dom";
 
-function ProjectCard () {
+function ProjectCard(props) {
   
   return (
     <div className="ProjectCard card">
-      <Link to={`/projects/PROJECT_ID_HERE`}>
-        <h3>PROJECT_TITLE_HERE</h3>
+      <Link to={`/projects/${props.project.id}`}>
+        <h3>{props.project.title}</h3>
       </Link>
-      <p>PROJECT_DESCRIPTION_HERE</p>
+      <p>{props.project.description}</p>
     </div>
   );
 }
+
+//* or by receiving the spread props
+// function ProjectCard({ id, title, description }) {
+  
+//   return (
+//     <div className="ProjectCard card">
+//       <Link to={`/projects/${id}`}>
+//         <h3>{title}</h3>
+//       </Link>
+//       <p>{description}</p>
+//     </div>
+//   );
+// }
 
 export default ProjectCard;
