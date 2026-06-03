@@ -58,7 +58,7 @@ function ProjectDetailsPage () {
         <button>Back to projects</button>
       </Link>
       
-      <Link to={`/projects/edit/PROJECT_ID_HERE`}>
+      <Link to={`/projects/edit/${project.id}`}>
         <button>Edit Project</button>
       </Link>      
       

@@ -8,6 +8,7 @@ function CreateProjectPage() {
   
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [ isCreating, setIsCreating ] = useState(false)
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ function CreateProjectPage() {
     }
 
     try {
+      setIsCreating(true) // disable the button while the call to the backend is made.
       // call the API here to create one project...
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/projects`, body)
       
@@ -50,7 +52,7 @@ function CreateProjectPage() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button type="submit">Submit</button>
+        <button disabled={isCreating} type="submit">Submit</button>
       </form>
     </div>
   );

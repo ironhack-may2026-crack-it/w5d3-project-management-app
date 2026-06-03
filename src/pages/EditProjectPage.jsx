@@ -9,14 +9,38 @@ function EditProjectPage() {
   
   const [ title, setTitle ] = useState("");
   const [ description, setDescription ] = useState("");
-  // const [ isLoading, setIsLoading ] = useState(true)
+  const [ isLoading, setIsLoading ] = useState(true)
+  const [ isDeleteConfirmationShowing, setIsDeleteConfirmationShowing] = useState(false)
+
+  useEffect(() => {
+
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`)
+    .then((response) => {
+      console.log(response.data)
+      setTitle(response.data.title)
+      setDescription(response.data.description)
+      setIsLoading(false)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+  }, [])
 
   const handleFormSubmit = async(e) => {
     e.preventDefault();
 
+    const body = {
+      title, // => title: title
+      description // => description: description
+    }
+
     try {
-      // call the API here to edit one task...
+      // call the API here to edit one project...
+      const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`, body)
       
+      navigate(`/projects/${projectId}`)
+
     } catch (error) {
       console.log(error)
       //todo proper error handling here 
@@ -26,6 +50,8 @@ function EditProjectPage() {
   const deleteProject = async() => {
     try {
       // call the API here to delete one task...
+      const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/projects/${projectId}`)
+      navigate("/projects")
       
     } catch (error) {
       console.log(error)
@@ -33,7 +59,7 @@ function EditProjectPage() {
     }
   }; 
 
-  // if (isLoading) return <h3>Loading...</h3> //todo proper loading animation here
+  if (isLoading) return <h3>Loading...</h3> //todo proper loading animation here
 
   return (
     <div className="EditProjectPage">
@@ -58,7 +84,12 @@ function EditProjectPage() {
         <button type="submit">Update Project</button>
       </form>
 
-      <button onClick={deleteProject}>Delete Project</button>      
+      <button onClick={() => setIsDeleteConfirmationShowing(true)}>Delete Project</button>
+
+      {isDeleteConfirmationShowing && <div>
+        <p>Are you sure?</p>
+        <button onClick={deleteProject}>YES</button>      
+      </div>}
     </div>
   );
 }
