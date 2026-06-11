@@ -4,7 +4,8 @@ function HomePage() {
         <h1>Home Page</h1>
 
           <div>
-            <h3>Some functionality half way done...</h3>
+            <label htmlFor="">Search Projects!</label>
+            <input type="text" />
           </div>
 
       </div>
